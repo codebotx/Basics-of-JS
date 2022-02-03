@@ -9,7 +9,7 @@ console.log(fname)
 
 //VARIABLES:  let-> reassign values, const-> cannot reassign values --> introduced in ES6
 
-//DATA TYPES: Strings, Numbers, BOoleans, null, undefined, Symbol-> ES6
+//DATA TYPES: Strings, Numbers, Booleans, null, undefined, Symbol-> ES6
 
 const str = 'String';
 const age = 23;
