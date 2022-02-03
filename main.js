@@ -15,16 +15,16 @@ const str = 'String';
 const age = 23;
 const rating = 4.5;
 const isbool = true;
-const x = null;
-const y = undefined;
+// const x = null;
+// const y = undefined;
 let z;
 
 console.log(typeof str);
 console.log(typeof age);
 console.log(typeof rating);
 console.log(typeof isbool);
-console.log(typeof x); // wrong
-console.log(typeof y);
+// console.log(typeof x); // wrong
+// console.log(typeof y);
 
 //Concatenation
 console.log('My name is ' + fname + ' and I am ' + age);
@@ -136,3 +136,189 @@ const todoTextcomp = todos.filter(function(todo) {
     return todo.text;
 });
 console.log(todoTextcomp);
+
+//Conditional Statements
+// const x = 10;
+const x = '10';
+const y = 20;
+
+if (x == 10) {
+    console.log('x is 10');
+}
+if (x === 10) {
+    console.log('x is 10');
+} else {
+    console.log('x is not 10');
+}
+
+// ternary operator
+console.log(x === 10 ? 'x is 10' : 'x is not 10');
+
+//Switch
+switch (x) {
+    case 10:
+        console.log('x is 10');
+        break;
+    case 20:
+        console.log('x is 20');
+        break;
+    default:
+        console.log('x is not 10 or 20');
+        break;
+}
+
+//Functions
+function addNums(num1 = 1, num2 = 1) {
+    return num1 + num2;
+}
+
+sum = addNums();
+console.log(sum);
+
+//Arrow Functions
+
+// const addNumsarr = (num1 = 2, num2 = 1) => {
+//     return num1 + num2;
+// }
+
+const addNumsarr = (num1 = 2, num2 = 1) => num1 + num2;
+
+sum = addNumsarr();
+console.log(sum);
+
+
+//Classes
+
+function Person(firstName, lastName, dob) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.dob = new Date(dob);
+
+}
+
+//Instaniate object
+const person1 = new Person('John', 'Doe', '4-3-1980');
+
+const person2 = new Person('Mary', 'Smith', '3-6-1985');
+
+console.log(person1);
+console.log(person2.dob.getDay());
+// console.log(person2.getBirthYear());
+// console.log(person1.getFullName());
+
+Person.prototype.getBirthYear = function() {
+    return this.dob.getFullYear();
+}
+Person.prototype.getFullName = function() {
+    return `${this.firstName} ${this.lastName}`;
+}
+
+console.log(person1.getBirthYear());
+console.log(person1.getFullName());
+
+// ES6
+
+class PersonClass {
+    constructor(
+        firstName,
+        lastName,
+        dob
+    ) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = new Date(dob);
+    }
+    getBirthYear() {
+        return this.dob.getFullYear();
+    }
+    getFullName() {
+        return `${this.firstName} ${this.lastName}`;
+    }
+}
+
+
+//DOM
+// console.log(window)
+//     // Single element
+// document.getElementById('my-form');
+// console.log(document.querySelector('.container'));
+// // Multiple Element Selectors
+// console.log(document.querySelectorAll('.item'));
+// console.log(document.getElementsByTagName('li'));
+// console.log(document.getElementsByClassName('item'));
+
+// const items = document.querySelectorAll('.item');
+// items.forEach((item) => console.log(item));
+
+
+// // MANIPULATING THE DOM
+// const ul = document.querySelector('.items');
+// // ul.remove();
+// // ul.lastElementChild.remove();
+// ul.firstElementChild.textContent = 'Hello';
+// ul.children[1].innerText = 'Brad';
+// ul.lastElementChild.innerHTML = '<h1>Anubhab</h1>';
+
+// const btn = document.querySelector('.btn');
+// // btn.style.background = 'red';
+
+
+// // // EVENTS
+
+// // Mouse Event
+// btn.addEventListener('click', e => {
+//     console.log('click');
+//     e.preventDefault();
+//     console.log(e.target.className);
+//     // document.getElementById('my-form').style.background = '#ccc';
+//     // document.querySelector('body').classList.add('bg-dark');
+//     ul.lastElementChild.innerHTML = '<h1>Changed</h1>';
+// });
+
+// Keyboard Event
+// const nameInput = document.querySelector('#name');
+// nameInput.addEventListener('input', e => {
+//     document.querySelector('.container').append(nameInput.value);
+// });
+
+
+// USER FORM SCRIPT
+
+// Put DOM elements into variables
+const myForm = document.querySelector('#my-form');
+const nameInput = document.querySelector('#name');
+const emailInput = document.querySelector('#email');
+const msg = document.querySelector('.msg');
+const userList = document.querySelector('#users');
+
+// Listen for form submit
+myForm.addEventListener('submit', onSubmit);
+
+function onSubmit(e) {
+    e.preventDefault();
+
+    if (nameInput.value === '' || emailInput.value === '') {
+        // alert('Please enter all fields');
+        msg.classList.add('error');
+        msg.innerHTML = 'Please enter all fields';
+
+        // Remove error after 3 seconds
+        setTimeout(() => msg.remove(), 3000);
+    } else {
+        // Create new list item with user
+        const li = document.createElement('li');
+
+        // Add text node with input values
+        li.appendChild(document.createTextNode(`${nameInput.value}: ${emailInput.value}`));
+
+        // Add HTML
+        li.innerHTML = `<strong>${nameInput.value}</strong>: ${emailInput.value}`;
+
+        // Append to ul
+        userList.appendChild(li);
+
+        // Clear fields
+        nameInput.value = '';
+        emailInput.value = '';
+    }
+}
